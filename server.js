@@ -1,4 +1,4 @@
-console.log("TUDO SAFE POR AQUI");
+console.log("SE CHEGOU ATÉ AQUI TA SAFE");
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -71,3 +71,6 @@ app.route('/edit/:id').get((req, res) => {
     console.log('Dado Atualizado' + id);
   });
 });
+//DELETANDO INFORMAÇÕES DO BANCO 
+
+
