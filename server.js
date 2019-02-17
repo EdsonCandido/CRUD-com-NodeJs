@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const MongoCliente = require('mongodb').MongoClient;
+const ObjectId  = require('mongodb').ObjectId;
 
 const uri = "mongodb://localhost:27017/crud-nodejs";
 
@@ -43,5 +44,30 @@ app.get('/show', (req, res) => {
   db.collection('data').find().toArray((err, result) => {
     if(err) return console.log(err);
     res.render('show.ejs', {data: result});
+  });
+});
+//EDITANDO DADOS DO BANCO DE DADOS
+app.route('/edit/:id').get((req, res) => {
+  var id = req.params.id;
+
+  db.collection('data').find(ObjectId(id)).toArray((err, result) => {
+    if(err) return res.send(err + 'aqui ');
+    res.render('edit.ejs', { data: result })
+  }) 
+}).post((req, res) => {
+  var id = req.params.id;
+  var name = req.body.name;
+  var surname = req.body.surname;
+
+  db.collection('data').updateOne({_id: ObjectId(id)}, {
+    $set:{
+      name : name,
+      surname : surname
+    }
+  }, (err, result) => {
+    if(err) return res.send(err);
+
+    res.redirect('/show');
+    console.log('Dado Atualizado' + id);
   });
 });

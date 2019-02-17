@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CRUD - NODEJS</title>
+  </head>
+  <body>
+    <h2>Edit Register</h2>
+    <% data.forEach(function(details){%>
+
+    <form class="" action="/edit/<%=details._id%>" method="post">
+      <input type="text" name="name" placeholder="Nome" value="<%=details.name%>">
+      <input type="text" name="surname" placeholder="Sobrenome" value="<%=details.surname%>">
+      <button><a href="/show">Lista</a></button>
+      <button type="submit">Atualizar</button>
+    </form>
+    <%})%>
+  </body>
+</html>
