@@ -31,6 +31,17 @@ app.post('/show', (req, res) =>{
   db.collection('data').save(req.body , (err, result) =>{
     if(err) return console.log(err);
     console.log("Savo no banco ");
-    res.redirect('/');
+    res.redirect('/show');
+  });
+});
+//PREPARANDO DADOS PARA EXIBIR NA TELA
+app.get('/', (req, res) => {
+  let cursor = db.collection('data').find();
+});
+//LENDO DADOS DO BANCO DE DADOS 
+app.get('/show', (req, res) => {
+  db.collection('data').find().toArray((err, result) => {
+    if(err) return console.log(err);
+    res.render('show.ejs', {data: result});
   });
 });
