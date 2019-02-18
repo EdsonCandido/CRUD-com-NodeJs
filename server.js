@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const MongoCliente = require('mongodb').MongoClient;
 const ObjectId  = require('mongodb').ObjectId;
 
+//conexão com o mongo
 const uri = "mongodb://localhost:27017/crud-nodejs";
 
 MongoCliente.connect(uri, (err, client) =>{
