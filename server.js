@@ -1,4 +1,4 @@
-console.log("SE CHEGOU ATÉ AQUI TA SAFE");
+console.log("INICIALIZANDO...");
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -16,6 +16,7 @@ MongoCliente.connect(uri, (err, client) =>{
 
   app.listen(3000, ()=>{
     console.log('Serve 3000');
+    console.log("SE CHEGOU ATÉ AQUI TA SAFE");
   });
 });
 
@@ -72,5 +73,13 @@ app.route('/edit/:id').get((req, res) => {
   });
 });
 //DELETANDO INFORMAÇÕES DO BANCO 
+app.route('/delete/:id').get((req, res) => {
+  var id = req.params.id;
 
+  db.collection('data').deleteOne({_id: ObjectId(id)}, (err, result) => {
+    if(err) return res.send(500, err);
+    console.log("ID : "+id+" DELETADO COM SUCESSO");
+    res.redirect('/show');
+  });
+});
 
